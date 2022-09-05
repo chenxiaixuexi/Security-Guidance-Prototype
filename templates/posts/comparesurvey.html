@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Project Title</title>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/frame.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="css/controls.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="css/custom.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href='https://fonts.geekzu.org/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.geekzu.org/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.geekzu.org/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+  <script src="https://gapis.geekzu.org/ajax/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style>
+    .menu-index {
+      color: rgb(254, 254, 254) !important;
+      opacity: 1 !important;
+      font-weight: 700 !important;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="menu-container"></div>
+  <div class="content-container">
+    <div class="banner">
+      <div class="banner-table flex-column">
+        <div class="flex-row">
+          <div class="flex-item flex-column">
+            <h2 class="add-top-margin-small">Portal</h2>
+          </div>
+          <div class="menu-items flex-row-center flex-item">
+            <a href="/" class="menu-index">Analyze Survey Panel</a>
+            <a href="comparesurvey.html" class="menu-index">Compare Survey Panel</a>
+            <a href="/docs.html" class="menu-index">Docs</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="content">
+        <div class="content-table flex-column">
+    <div class="flex-row">
+        <div class="flex-item flex-column">
+          <h2> Compare</h2>
+        
+        <p class="text">
+          This part could help users to compare different configration files
+        </p>
+        <div class="custom-survey add-top-margin add-bottom-margin">
+          <form method="POST" action="/compare" enctype="multipart/form-data">
+          <span class="text">1. The size of company</span>
+          <div class="custom-radio-group-survey add-top-margin">
+            <div><input type="radio" name="moneySalary" value="smaller than 10" id="scenario-1"> <label class="break-long-url" for="scenario-1">smaller than 10</label></div>
+            <div><input type="radio" name="moneySalary" value="10 - 100" id="scenario-2"> <label class="break-long-url" for="scenario-2">10 - 100</label></div>
+            <div><input type="radio" name="moneySalary" value="100 - 1000" id="scenario-3"> <label class="break-long-url" for="scenario-3">100 - 1000</label></div>
+            <div><input type="radio" name="moneySalary" value="1000 - 10000" id="scenario-4"> <label class="break-long-url" for="scenario-4">1000 - 10000</label></div>
+            <div><input type="radio" name="moneySalary" value="larger than 10000" id="scenario-5"> <label class="break-long-url" for="scenario-5">larger than 10000</label></div>
+          </div>
+        </div>
+  
+        <div class="custom-survey add-top-margin add-bottom-margin">
+          <span class="text">2 The average salary</span>
+          <div class="custom-radio-group-survey add-top-margin">
+            <div><input type="radio" name="money" value="smaller than 10" id="scenario-6"> <label class="break-long-url" for="scenario-6">smaller than $10</label></div>
+            <div><input type="radio" name="money" value="10 - 30" id="scenario-7"> <label class="break-long-url" for="scenario-7">$10 - $30</label></div>
+            <div><input type="radio" name="money" value="larger than 30" id="scenario-8"> <label class="break-long-url" for="scenario-8">larger than $30</label></div>
+          </div>
+        </div>
+
+        <div class="custom-survey add-top-margin add-bottom-margin">
+          <span class="text">Upload the two configration files</span>
+          <div class="custom-radio-group-survey add-top-margin">
+              <p>The baseline</p>
+              <input class="custom-textbox stretch-on-mobile" name="fileA" type="file" id = "A">
+              <p>compare target</p>
+              <input class="custom-textbox stretch-on-mobile" name="fileB" type="file" id = "B">
+              <input  type="submit" value="Compare" id = "submitpart"/>
+            </form>
+            <script>
+              var submit = document.getElementById("submitpart")
+              submit.onclick = function (){
+                var formData = new FormData();
+                formData.append("fileA",$("A")[0].files[0]);
+                formData.append("fileB",$("B")[0].files[0]);
+      
+                $.ajax({
+                  type:"POST",
+                  dataType:"formData",
+                  processData:false,
+                  contentType:false,
+                  url:"/compare",
+                  data: formData,
+                  success: function(dataResult){
+                    console.log(dataResult["A"]);
+                    // localStorage.setItem("item", JSON.stringify(dataResult));
+                    // window.location.href = "compare.html?item="+escape(JSON.stringify(dataResult));
+                  }
+                })
+              }
+            </script>
+          </div>
+        </div>
+      <div>
+
+
+      </div>
+
+      </div>
+
+
+      </div>
+      </div>
+      </div>
+      
+
+  </div>
+</body>
+</html>

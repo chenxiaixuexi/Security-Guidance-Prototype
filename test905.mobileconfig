@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadDescription</key>
+			<string>Configures passcode settings</string>
+			<key>PayloadDisplayName</key>
+			<string>Passcode</string>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.mobiledevice.passwordpolicy.9901598E-BC10-472E-BE11-9E7F49EA669E</string>
+			<key>PayloadType</key>
+			<string>com.apple.mobiledevice.passwordpolicy</string>
+			<key>PayloadUUID</key>
+			<string>9901598E-BC10-472E-BE11-9E7F49EA669E</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>allowSimple</key>
+			<true/>
+			<key>forcePIN</key>
+			<true/>
+			<key>maxFailedAttempts</key>
+			<integer>5</integer>
+			<key>maxGracePeriod</key>
+			<integer>5</integer>
+			<key>maxInactivity</key>
+			<integer>5</integer>
+			<key>maxPINAgeInDays</key>
+			<integer>30</integer>
+			<key>minLength</key>
+			<integer>12</integer>
+			<key>pinHistory</key>
+			<real>6</real>
+			<key>requireAlphanumeric</key>
+			<true/>
+		</dict>
+	</array>
+	<key>PayloadDisplayName</key>
+	<string>Untitled</string>
+	<key>PayloadIdentifier</key>
+	<string>dous-MacBook-Pro.05484628-1624-4727-A55E-22C83E47D77D</string>
+	<key>PayloadRemovalDisallowed</key>
+	<false/>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>2B1205C1-F33F-40BC-B9D4-6A446F07D717</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

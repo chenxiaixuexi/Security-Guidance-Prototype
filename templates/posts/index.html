@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Project Title</title>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/frame.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="css/controls.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="css/custom.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href='https://fonts.geekzu.org/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.geekzu.org/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.geekzu.org/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+  <script src="https://gapis.geekzu.org/ajax/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style>
+    .menu-index {
+      color: rgb(255, 255, 255) !important;
+      opacity: 1 !important;
+      font-weight: 700 !important;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="menu-container"></div>
+  <div class="content-container">
+    <div class="banner">
+      <div class="banner-table flex-column">
+        <div class="flex-row">
+          <div class="flex-item flex-column">
+            <h2 class="add-top-margin-small">Portal</h2>
+          </div>
+          <div class="menu-items flex-row-center flex-item">
+            <a href="/" class="menu-index">Analyze Survey Panel</a>
+            <a href="comparesurvey.html" class="menu-index">Compare Survey Panel</a>
+            <a href="/docs.html" class="menu-index">Docs</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="content">
+    <div class="content-table flex-column">
+    <div class="flex-row">
+      <div class="flex-item flex-column" >
+        <h2> Analyze</h2>
+        <form method="POST" action="/" enctype="multipart/form-data">
+      
+      <p class="text">
+        Please choose the number of employees and the average salary
+      </p>
+      <div class="custom-survey add-top-margin add-bottom-margin">
+        <span class="text">1. The size of company</span>
+        <div class="custom-radio-group-survey add-top-margin">
+          <div><input type="radio" name="scenario-question-sq-1508-scale" value="smaller than 10" id="scenario-question-sq-1508-item-0"> <label class="break-long-url" for="scenario-question-sq-1508-item-0">smaller than 10</label></div>
+          <div><input type="radio" name="scenario-question-sq-1508-scale" value="10 - 100" id="scenario-question-sq-1508-item-1"> <label class="break-long-url" for="scenario-question-sq-1508-item-1">10 - 100</label></div>
+          <div><input type="radio" name="scenario-question-sq-1508-scale" value="100 - 1000" id="scenario-question-sq-1508-item-2"> <label class="break-long-url" for="scenario-question-sq-1508-item-2">100 - 1000</label></div>
+          <div><input type="radio" name="scenario-question-sq-1508-scale" value="1000 - 10000" id="scenario-question-sq-1508-item-3"> <label class="break-long-url" for="scenario-question-sq-1508-item-3">1000 - 10000</label></div>
+          <div><input type="radio" name="scenario-question-sq-1508-scale" value="larger than 10000" id="scenario-question-sq-1508-item-4"> <label class="break-long-url" for="scenario-question-sq-1508-item-4">larger than 10000</label></div>
+        </div>
+      </div>
+
+      <div class="custom-survey add-top-margin add-bottom-margin">
+        <span class="text">2 The average salary</span>
+        <div class="custom-radio-group-survey add-top-margin">
+          <div><input type="radio" name="scenario-question-sq-1509-scale" value="smaller than 10" id="scenario-question-sq-1508-item-5"> <label class="break-long-url" for="scenario-question-sq-1508-item-5">smaller than $10</label></div>
+          <div><input type="radio" name="scenario-question-sq-1509-scale" value="10 - 30" id="scenario-question-sq-1508-item-6"> <label class="break-long-url" for="scenario-question-sq-1508-item-6">$10 - $30</label></div>
+          <div><input type="radio" name="scenario-question-sq-1509-scale" value="larger than 30" id="scenario-question-sq-1508-item-7"> <label class="break-long-url" for="scenario-question-sq-1508-item-7">larger than $30</label></div>
+        </div>
+      </div>
+
+      <div class="custom-survey add-top-margin add-bottom-margin">
+        <span class="text">3 The Authentication Method</span>
+        <div class="custom-radio-group-survey add-top-margin">
+          <div><input type="radio" name="scenario-question-sq-1510-scale" value="Disable" id="disable"> <label class="break-long-url" for="disable">Disable</label></div>
+          <div><input type="radio" name="scenario-question-sq-1510-scale" value="Codes" id="scenario-question-sq-1508-item-8"> <label class="break-long-url" for="scenario-question-sq-1508-item-8">Codes</label></div>
+          <div><input type="radio" name="scenario-question-sq-1510-scale" value="Push" id="scenario-question-sq-1508-item-9"> <label class="break-long-url" for="scenario-question-sq-1508-item-9">Push</label></div>
+          <div><input type="radio" name="scenario-question-sq-1510-scale" value="SMS" id="scenario-question-sq-1508-item-10"> <label class="break-long-url" for="scenario-question-sq-1508-item-10">SMS</label></div>
+          <div><input type="radio" name="scenario-question-sq-1510-scale" value="TOTP" id="scenario-question-sq-1508-item-11"> <label class="break-long-url" for="scenario-question-sq-1508-item-11">TOTP</label></div>
+          <div><input type="radio" name="scenario-question-sq-1510-scale" value="U2F" id="scenario-question-sq-1508-item-12"> <label class="break-long-url" for="scenario-question-sq-1508-item-12">U2F</label></div>
+        </div>
+      </div>
+
+      <div class="custom-survey add-top-margin add-bottom-margin">
+        <span class="text">4 The device encryption</span>
+        <div class="custom-radio-group-survey add-top-margin">
+          <div><input type="radio" name="scenario-question-sq-1511-scale" value="1" id="13"> <label class="break-long-url" for="13">Enable</label></div>
+          <div><input type="radio" name="scenario-question-sq-1511-scale" value="-1" id="14"> <label class="break-long-url" for="14">Disable</label></div>
+        </div>
+      </div>
+
+      <div class="custom-survey add-top-margin add-bottom-margin">
+        <span class="text">5. Password policy</span>
+        <input class="custom-textbox stretch-on-mobile" name="file" type="file">
+      </div>
+      <input  type="submit" value="Upload" />
+    </form>
+      </div>
+
+      </div>
+      </div>
+      </div>
+
+  </div>
+</body>
+</html>

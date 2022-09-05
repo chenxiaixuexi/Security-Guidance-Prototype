@@ -1,0 +1,26 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 0vh;
+  margin: 0;
+}
+
+#datasets-example-4 {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 20px;
+  max-width: 2000px;
+  margin: 0 auto;
+
+
+}
+#datasets-example-4.column {
+  height: 500px;
+  max-width: 1200px;
+  width: 1200px;
+}
+#datasets-example-4.legend {
+  flex-shrink: 3;
+}

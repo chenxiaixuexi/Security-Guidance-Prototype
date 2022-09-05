@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html">
+<title>元素table</title>
+</head>
+<body>
+<form action="/submit" method="post">
+<H2>Password configuration</H2>
+<p>choose password expiration</p>
+<select id=" expire" name = "duration">
+    <option value = 30>30
+    </option>
+    <option value = 60>60
+    </option>
+    <option value = 120>120
+    </option>
+</select>
+<p>choose password length</p>
+<select id = "length" name = "len">
+    <option value = 8> longer than 8</option>
+    <option value = 12> longer than 12</option>
+    <option value = 16> longer than 16</option>
+</select>
+<p> choose the complexity</p>
+<select id="complexity" name="com">
+    <option value = "dictionary"> at least one type charactor</option>
+    <option value = "internet"> at least words and number</option>
+    <option value="random"> must contain number, special charactor and words</option>
+</select>
+
+<p> type of device</p>
+<select id = "device" name="device">
+    <option value="smartphone">smartphone</option>
+    <option value="personal computer">PC</option>
+</select>
+<H2>Authentication configuration</H2>
+<p>choose the authentication method</p>
+<select id="auth" name="auth">
+    <option value = "code"> Codes</option>
+    <option value = "Push">Push</option>
+    <option value ="SMS"> SMS</option>
+    <option value="TOTP">TOTP</option>
+    <option value = "U2F">U2F</option>
+</select>
+<H2>Device encryption</H2>
+<p>choose the type of operating system</p>
+<select id="enc" name="enc">
+    <option value = "ios"> MACOS FileVault2</option>
+    <option value = "win">Windows BitLoker</option>
+</select>
+<input type="submit">Calculate!</input>
+</form>
+</body>
+</html>

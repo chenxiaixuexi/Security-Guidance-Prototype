@@ -324,14 +324,8 @@ func CalShay(policy *passwordPolicy) *shay {
 }
 
 func Analyze(A *von, B *greene, C *WMelicher, D *shay, companyInfo *company, policy *passwordPolicy) map[string]any {
-	maxEmployees := companyInfo.people / 2
-	if companyInfo.people > 10000 {
-		maxEmployees = companyInfo.people
-	}
+	maxEmployees := companyInfo.people
 	maxsalary := companyInfo.salary
-	if companyInfo.salary > 30 {
-		maxsalary = 40
-	}
 	//seconds
 	var timelist []float64
 	timelist = append(timelist, float64(A.overall), float64(B.overall), float64(C.overall), float64(D.overall))
@@ -484,9 +478,6 @@ func Analyze_Compare(salary int, people int, policy *passwordPolicy, A *von, B *
 	return newS
 }
 
-func comparemoney(people int, money int, seconds int) int {
-	return people * money * seconds
-}
 func FindMinMax(flist []float64) (float64, float64) {
 	min := flist[0]
 	max := flist[0]
@@ -559,15 +550,15 @@ func main() {
 		fmt.Println(people)
 		switch people {
 		case "smaller than 10":
-			companyInfo.people = 10
+			companyInfo.people = 5
 		case "10 - 100":
-			companyInfo.people = 100
+			companyInfo.people = 50
 		case "100 - 1000":
-			companyInfo.people = 1000
+			companyInfo.people = 500
 		case "1000 - 10000":
-			companyInfo.people = 10000
+			companyInfo.people = 5000
 		case "larger than 10000":
-			companyInfo.people = 10001
+			companyInfo.people = 10000
 		}
 		salary := c.PostForm("scenario-question-sq-1509-scale")
 		fmt.Println(salary)
@@ -577,7 +568,7 @@ func main() {
 		case "10 - 30":
 			companyInfo.salary = 30
 		case "larger than 30":
-			companyInfo.salary = 31
+			companyInfo.salary = 40
 		}
 		auth := c.PostForm("scenario-question-sq-1510-scale")
 		switch auth {
@@ -716,9 +707,6 @@ func main() {
 		Battempt := float64(TransB.Entryattempts) / float64(TransA.Entryattempts)
 		Battempt, _ = decimal.NewFromFloat(Battempt).Round(2).Float64()
 
-		moneyA := comparemoney(employeesP, money, int(TransA.seconds))
-		moneyB := comparemoney(employeesP, money, int(TransB.seconds))
-		fmt.Println("moneyA", moneyA, TransA.seconds)
 		number := gin.H{
 			"ALen":       TransA.length,
 			"BLen":       TransB.length,
@@ -726,8 +714,8 @@ func main() {
 			"BNum":       TransB.NumOfChar,
 			"AEx":        TransA.expire,
 			"BEx":        TransB.expire,
-			"moneycostA": moneyA,
-			"moneycostB": moneyB,
+			"moneycostA": TransA.money,
+			"moneycostB": TransB.money,
 
 			"Acost":  TransA.seconds,
 			"Bcost":  TransB.seconds,

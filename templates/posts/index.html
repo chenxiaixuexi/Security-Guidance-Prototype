@@ -44,7 +44,7 @@
     <div class="flex-row">
       <div class="flex-item flex-column" >
         <h2> Analyze</h2>
-        <form method="POST" action="/" enctype="multipart/form-data">
+        <form method="POST" action="/" enctype="multipart/form-data" onsubmit="return checkForm()">
       
       <p class="text">
         Please choose the number of employees and the average salary
@@ -91,10 +91,24 @@
 
       <div class="custom-survey add-top-margin add-bottom-margin">
         <span class="text">5. Password policy</span>
-        <input class="custom-textbox stretch-on-mobile" name="file" type="file">
+        <input class="custom-textbox stretch-on-mobile" name="file" type="file" accept=".mobileconfig" id="fileupload">
       </div>
-      <input  type="submit" value="Upload" />
+      <input  type="submit" value="Upload" id = "submitbut"/>
     </form>
+    <script>
+      function checkForm(){
+        var q4 = $("input[name=scenario-question-sq-1511-scale]:checked").val();
+        var q3 = $("input[name=scenario-question-sq-1510-scale]:checked").val();
+        var q2 = $("input[name=scenario-question-sq-1509-scale]:checked").val();
+        var q1 = $("input[name=scenario-question-sq-1508-scale]:checked").val();
+        var file = document.getElementById("fileupload").value;
+        if (q4==undefined||q3==undefined||q2==undefined||q1==undefined||file==undefined){
+          alert("Oops, you need fulfill all questions.")
+          return false;
+        }
+        return true;
+      }
+    </script>
       </div>
 
       </div>

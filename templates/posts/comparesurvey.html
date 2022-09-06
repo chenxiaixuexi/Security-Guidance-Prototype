@@ -50,7 +50,7 @@
           This part could help users to compare different configration files
         </p>
         <div class="custom-survey add-top-margin add-bottom-margin">
-          <form method="POST" action="/compare" enctype="multipart/form-data">
+          <form method="POST" action="/compare" enctype="multipart/form-data" onsubmit="return checkForm()">
           <span class="text">1. The size of company</span>
           <div class="custom-radio-group-survey add-top-margin">
             <div><input type="radio" name="moneySalary" value="smaller than 10" id="scenario-1"> <label class="break-long-url" for="scenario-1">smaller than 10</label></div>
@@ -103,6 +103,19 @@
             </script>
           </div>
         </div>
+        <script>
+          function checkForm(){
+            var q1 = $("input[name=moneySalary]:checked").val();
+            var q2 = $("input[name=money]:checked").val();
+            var file = document.getElementById("A").value;
+            var file2 = document.getElementById("B").value;
+            if (file2==undefined||q2==undefined||q1==undefined||file==undefined){
+              alert("Oops, you need fulfill all questions.")
+              return false;
+            }
+            return true;
+          }
+        </script>
       <div>
 
 

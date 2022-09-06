@@ -45,7 +45,7 @@
         <!--Start Text Only-->
         <div class="flex-row">
           <div class="flex-item flex-column">
-            <h2> Productivity cost overview</h2>
+            <h2> Productivity Cost Overview</h2>
             <p class="text">
             According to your selection, the number of employees is estimated at {{.employees}} to participate in the subsequent financial cost
             , and the average hourly wage is calculated as ${{.money}}. Here are the results of the analysis:
@@ -57,7 +57,7 @@
             The minimum time spent by all of employees for a year is {{.mintime}} hours. The maximum time spent by them for a year is {{.maxtime}} hours.
             If some of employees use mobile device, each one would spend extra {{.mobile}} hours. [1][2][3][4]
             </p>
-            <h3>Error rate</h3>
+            <h3>Error Rate</h3>
             <p class="text">
               The average error rate is {{.error}}, which means that each employee could make {{.num}} failed attempts for a year.
               The maximum error rate is {{.maxerror}}, so each employee could make at largest {{.Maxnum}} failed attempts for a year.
@@ -72,20 +72,20 @@
              employees need to reset password {{.expire}} for a year, the number of total attempts for all of employees
              is {{.totalattempt}}. [3][4]
             </p>
-            <h3> passcode complexity </h3>
+            <h3> Passcode Complexity </h3>
             <p class="text">
-              Accroding to password policy, the more comlpex non-alphanumeric value required, more hours cost. The number of special character is {{.specialNum}}
+              Accroding to password policy, the more comlpex non-alphanumeric value required, more hours cost. The number of special character is {{.specialNum}}.
               The total time costed for entering non-alphanumeric for the whole company is {{.totalTime}} hours. [2]
             </p>
             <h3> Force PIN </h3>
             <p class="text">
               Each employee is required to enter PIN code for verification, the total time cost for the whole company is {{.timeauth}} hours. [5][6]
             </p>
-            <h3> Authentication time </h3>
+            <h3> Authentication Time </h3>
             <p class="text">
               Each employee is required to use authencation methods for security, the total time cost for the whole company is {{.authtime}} hours. [5][6]
             </p>
-            <h3> Device encryption </h3>
+            <h3> Device Encryption </h3>
             <p class="text">
               Each employee is required to use device encryption for data security, the total time cost for the whole company is {{.enctime}} hours.
             </p>
@@ -95,7 +95,7 @@
               The required minimum length is {{.length}}, and the number of required type of characters is {{.class}}.
               The password selected by the user has a {{.probability}} probability of being cracked after 10^12 guesses. [3][4]
             </p>
-            <h3> Money cost </h3>
+            <h3> Money Cost </h3>
             <p class="text">
             Finally, in terms of time cost by password, authentication and encryption, the total cost money for the whole company is ${{.totalmoney}} within a year.
             </p>

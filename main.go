@@ -410,7 +410,8 @@ func Analyze(A *von, B *greene, C *WMelicher, D *shay, companyInfo *company, pol
 		"totalattempt": totalattempt,
 		"expire":       expireTime,
 
-		"totalTime": totalComplex,
+		"specialNum": policy.password_complex,
+		"totalTime":  totalComplex,
 
 		"timeauth": total,
 
@@ -536,6 +537,22 @@ func main() {
 		c.File("./templates/files/" + fileName)
 		return
 	})
+
+	r.GET("/instructions", func(c *gin.Context) {
+		fileName := c.Query("fileName")
+		//打开文件
+		_, errByOpenFile := os.Open("./" + fileName)
+		if errByOpenFile != nil {
+			fmt.Println(errByOpenFile)
+			c.Redirect(http.StatusFound, "/404")
+			return
+		}
+		c.Header("Content-Type", "application/octet-stream")
+		c.Header("Content-Disposition", "attachment; filename="+fileName)
+		c.Header("Content-Transfer-Encoding", "binary")
+		c.File("./" + fileName)
+		return
+	})
 	r.POST("/", func(c *gin.Context) {
 		companyInfo := &company{}
 		people := c.PostForm("scenario-question-sq-1508-scale")
@@ -646,7 +663,6 @@ func main() {
 			c.String(http.StatusBadRequest, "failed")
 			return
 		}
-		// c.SaveUploadedFile(file, dst)
 		name := fileA.Filename
 		fmt.Println("file name, ", name)
 		dir, _ := pathhelper.GetCurrentExecDir()
@@ -743,7 +759,9 @@ func main() {
 }
 
 /*
-1 error 要换一下 第四个
-2， 在实现那里增加一些公式- report
+1 add check form
+2 add reference
+3 upload help documentation
+4
 
 */

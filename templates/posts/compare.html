@@ -106,12 +106,12 @@ body {
 					  <td class="text-center">{{.moneycostB}}</td>
 					</tr>
 					<tr class="bg-color-light-gray">
-						<th class="text-center">Password of TimeCostn - Value</th>
+						<th class="text-center">Password of TimeCost - Value</th>
 						<td class="text-center" >{{.Acost}}</td>
 						<td class="text-center" >{{.Bcost}}</td>
 					  </tr>
 					<tr class="bg-color-light-gray">
-					  <th class="text-center">Password of TimeCostn - Ratio</th>
+					  <th class="text-center">Password of TimeCost - Ratio</th>
 					  <td class="text-center" id="percentA">{{.Afloat}}</td>
 					  <td class="text-center" id="percentB">{{.Bfloat}}</td>
 					</tr>
@@ -141,6 +141,12 @@ body {
 						<td class="text-center" > {{.SecurityLevelB}}</td>
 					  </tr>
 					  
+					  <tr class="bg-color-light-gray">
+						<th class="text-center">Failed Attempts</th>
+						<td class="text-center" id = "FailA"> {{.FailedA}}</td>
+						<td class="text-center" id = "FailB"> {{.FailedB}}</td>
+					  </tr>
+
 					  <tr class="bg-color-light-gray">
 						<th class="text-center">Wipe Times</th>
 						<td class="text-center" id = "wipeA"> {{.WipeA}}</td>
@@ -198,7 +204,8 @@ body {
 					var B1 = document.getElementById("percentB").innerHTML;
 
 					if(parseFloat(A1) > parseFloat(B1)){
-					var perB1 = ((parseFloat(B1)/parseFloat(A1).toFixed(2))*100).toString();
+					var perB1 = ((parseFloat(B1)/parseFloat(A1)).toFixed(2)*100).toString();
+					console.log(parseFloat(B1)/parseFloat(A1))
 					var styleA = "--size: calc( "+"100"+" / 100 );";
 					var styleB = "--size: calc( "+perB1+" / 100 );";
 					var p1 = document.getElementById("1");
@@ -208,12 +215,13 @@ body {
 					p2.style = styleB;
 					p2.innerHTML = perB1+"%";
 					}else{
-						var perA1 = ((parseFloat(A1)/parseFloat(B1).toFixed(2))*100).toString();
+						var perA1 = ((parseFloat(A1)/parseFloat(B1)).toFixed(2)*100).toString();
+						console.log(parseFloat(A1)/parseFloat(B1));
 						var styleA = "--size: calc( "+perA1+" / 100 );";
 					var styleB = "--size: calc( "+"100"+" / 100 );";
 					var p1 = document.getElementById("1");
 					p1.style = styleA;
-					p1.innerHTML = perA2+"%";
+					p1.innerHTML = perA1+"%";
 					var p2 = document.getElementById("2");
 					p2.style = styleB;
 					p2.innerHTML = "100%";
@@ -237,7 +245,7 @@ body {
 					var B2 = document.getElementById("errorB").innerHTML;
 
 					if(parseFloat(A2) > parseFloat(B2)){
-					var perB2 = ((parseFloat(B2)/parseFloat(A2).toFixed(2))*100).toString();
+					var perB2 = ((parseFloat(B2)/parseFloat(A2)).toFixed(2)*100).toString();
 					var styleA = "--size: calc( "+"100"+" / 100 );";
 					var styleB = "--size: calc( "+perB2+" / 100 );";
 					var p3 = document.getElementById("3");
@@ -247,8 +255,9 @@ body {
 					p4.style = styleB;
 					p4.innerHTML = perB2+"%";
 					}else{
-						var perA2 = ((parseFloat(A2)/parseFloat(B2).toFixed(2))*100).toString();
+						var perA2 = ((parseFloat(A2)/parseFloat(B2)).toFixed(2)*100).toString();
 						var styleA = "--size: calc( "+perA2+" / 100 );";
+						console.log(parseFloat(A2)/parseFloat(B2).toFixed(2));
 					var styleB = "--size: calc( "+"100"+" / 100 );";
 					var p3 = document.getElementById("3");
 					p3.style = styleA;
@@ -273,7 +282,7 @@ body {
 					var B3 = document.getElementById("attB").innerHTML;
 					
 					if(parseFloat(A3) > parseFloat(B3)){
-					var perB3 = ((parseFloat(B3)/parseFloat(A3).toFixed(2))*100).toString();
+					var perB3 = ((parseFloat(B3)/parseFloat(A3)).toFixed(2)*100).toString();
 					var styleA = "--size: calc( "+"100"+" / 100 );";
 					var styleB = "--size: calc( "+perB3+" / 100 );";
 					var p5 = document.getElementById("5");
@@ -283,7 +292,7 @@ body {
 					p6.style = styleB;
 					p6.innerHTML = perB3+"%";
 					}else{
-						var perA3 = ((parseFloat(A3)/parseFloat(B3).toFixed(2))*100).toString();
+						var perA3 = ((parseFloat(A3)/parseFloat(B3)).toFixed(2)*100).toString();
 						var styleA = "--size: calc( "+perA3+" / 100 );";
 					var styleB = "--size: calc( "+"100"+" / 100 );";
 					var p5 = document.getElementById("5");
@@ -301,7 +310,7 @@ body {
 					var perA4 = (parseInt(A4));
 					var perB4 = (parseInt(B4));
 					if(perA4 > perB4){
-						var percentB4 = ((parseFloat(perB4/perA4).toFixed(2))*100).toString();
+						var percentB4 = ((parseFloat(perB4/perA4)).toFixed(2)*100).toString();
 						console.log(percentB4);
 						var styleA = "--size: calc( "+"100"+" / 100 );";
 						var styleB = "--size: calc( "+percentB4+" / 100 );";
@@ -312,7 +321,7 @@ body {
 						p8.style = styleB;
 						p8.innerHTML = percentB4+"%";
 					}else{
-						var percentA4 = ((parseFloat(perA4/perB4).toFixed(2))*100).toString();
+						var percentA4 = ((parseFloat(perA4/perB4)).toFixed(2)*100).toString();
 						console.log(percentA4);
 						var styleA = "--size: calc( "+percentA4+" / 100 );";
 						var styleB = "--size: calc( "+"100"+" / 100 );";

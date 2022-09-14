@@ -73,6 +73,7 @@ type TransCompare struct {
 	expire        int64
 	NumOfChar     int64
 	length        int64
+	failedattempt int64
 }
 
 func Readfile(name string) map[string]string {
@@ -128,7 +129,7 @@ func definePaawordPolicy(dict map[string]string) *passwordPolicy {
 	} else {
 		policy.password_complex = 0
 	}
-	// requireAlphanumeric， means that like internet type/ 2class
+	// requireAlphanumeric
 	alnumeric := dict["requireAlphanumeric"]
 	switch alnumeric {
 	case "true":
@@ -136,7 +137,7 @@ func definePaawordPolicy(dict map[string]string) *passwordPolicy {
 	case "false":
 		policy.requireAlphanumeric = false
 	}
-	//allow simple, 可能会降低时间.
+	//allow simple character including number and letters
 	simple := dict["allowSimple"]
 	switch simple {
 	case "true":
@@ -181,18 +182,25 @@ func estimateTime(policy *passwordPolicy) *von {
 	fmt.Println("number of char:", policy.password_complex)
 	fmt.Println(policy.requireAlphanumeric)
 	//smartphone speed
-	internetspeed := float32(6.5) / float32(12)
-	random := float32(13) / float32(12)
-	dictinary := float32(3.5) / float32(12)
-	//password length
+	internetspeed := float32(3.5) / float32(12)
+	random := float32(7.5) / float32(12)
+	dictinary := float32(2.5) / float32(12)
 	sec := float32(0)
+
+	mobile_internetspeed := float32(5.5) / float32(12)
+	mobile_random := float32(13) / float32(12)
+	mobile_dictinary := float32(3.5) / float32(12)
+	mobile_sec := float32(0)
 
 	if policy.password_complex > 0 && policy.requireAlphanumeric == true {
 		sec += random * float32(policy.password_length)
+		mobile_sec += mobile_random * float32(policy.password_length)
 	} else if policy.requireAlphanumeric == true {
 		sec += internetspeed * float32(policy.password_length)
+		mobile_sec += mobile_internetspeed * float32(policy.password_length)
 	} else {
 		sec += dictinary * float32(policy.password_length)
+		mobile_sec += mobile_dictinary * float32(policy.password_length)
 	}
 	//input times
 	all := float32(365 * 4)
@@ -201,7 +209,7 @@ func estimateTime(policy *passwordPolicy) *von {
 	phoneErrorRate := float32(0.158)
 	PC := float32(0.087)
 	overallTime := all * (1 + overall_error) * sec / float32(3600)
-	smartphone := all * (1 + phoneErrorRate) * sec / float32(3600)
+	smartphone := all * (1 + phoneErrorRate) * mobile_sec / float32(3600)
 	PCtime := all * (1 + PC) * sec / float32(3600)
 
 	return &von{overallTime, smartphone, PCtime, overall_error}
@@ -218,7 +226,7 @@ func cal(policy *passwordPolicy) *greene {
 		mobilespeed += 1.3 * float32(policy.password_length)
 		pcspeed += 1.1 * float32(policy.password_length)
 		overallspeed += 1.2 * float32(policy.password_length)
-		complexchar += 2.5
+		complexchar += 2.5 * (float32(policy.password_complex) - 1)
 	}
 	totalerrate := (float32(2100) / 16500) / 12 * float32(policy.password_length)
 	all := float32(365 * 4)
@@ -235,21 +243,25 @@ func melicher(policy *passwordPolicy) *WMelicher {
 	create := float32(0)
 	attempts := float32(0)
 	creation_attempt := float32(0)
+	//1.4 is calculated as (13.7 / 8  + 14.4 / 12) / 2
+	//1.63 = (12.5/8 + 20.5/12)/2
 	if policy.password_complex > 0 && policy.requireAlphanumeric == true {
-		sec += 1.35 * float32(policy.password_length)
-		create += 1.8 * float32(policy.password_length)
-		attempts += 1.75
-		creation_attempt += 1.48
+		sec += 1.4 * float32(policy.password_length)
+		create += 1.63 * float32(policy.password_length)
+		attempts += (1.73/8 + 1.77/12) / 2 * float32(policy.password_length)
+		creation_attempt += (1.2/8 + 1.5/12) / 2 * float32(policy.password_length)
 	} else if policy.requireAlphanumeric == true {
+		//1.1 = 18/16
 		sec += 1.1 * float32(policy.password_length)
-		create += 1.68 * float32(policy.password_length)
-		attempts += 1.66
-		creation_attempt += 1.98
+		//1.48 = 23.8 / 16
+		create += 1.48 * float32(policy.password_length)
+		attempts += 1.68 / 16 * float32(policy.password_length)
+		creation_attempt += 1.92 / 16 * float32(policy.password_length)
 	} else {
-		sec += 0.9 * float32(policy.password_length)
-		create += 1.35 * float32(policy.password_length)
-		attempts += 1.8
-		creation_attempt += 1.84
+		sec += 17.8 / 20 * float32(policy.password_length)
+		create += 31 / 20 * float32(policy.password_length)
+		attempts += 1.8 / 20 * float32(policy.password_length)
+		creation_attempt += 1.84 / 20 * float32(policy.password_length)
 	}
 	all := float32(365 * 4)
 	overallTime := all * (attempts) * sec / float32(3600)
@@ -275,6 +287,7 @@ func melicher(policy *passwordPolicy) *WMelicher {
 // | basic16  | 20-30 |
 // | 2word16  | 10-20 |
 // | 3class16  | 0-10 |
+// They do not have time only attempt
 func CalShay(policy *passwordPolicy) *shay {
 	sec := float32(0)
 	//create  attempt
@@ -282,9 +295,9 @@ func CalShay(policy *passwordPolicy) *shay {
 	recall_attempt := float32(0)
 	security := ""
 	if policy.password_complex > 0 && policy.requireAlphanumeric == true {
-		sec += 1.1 * float32(policy.password_length)
-		attempts += 1.7
-		recall_attempt += 1.65 / 12 * float32(policy.password_length)
+		sec += 15.28 / 12 * float32(policy.password_length)
+		attempts += 1.6 / 12 * float32(policy.password_length)
+		recall_attempt += 1.8 / 12 * float32(policy.password_length)
 		if policy.password_length < 12 {
 			security += "larger than 30%"
 		} else if policy.password_length >= 12 && policy.password_length < 16 {
@@ -293,9 +306,9 @@ func CalShay(policy *passwordPolicy) *shay {
 			security += "smaller than 10%"
 		}
 	} else if policy.requireAlphanumeric == true {
-		sec += 0.9 * float32(policy.password_length)
-		recall_attempt += 1.65 / 12 * float32(policy.password_length)
-		attempts += 2
+		sec += 15 / 12 * float32(policy.password_length)
+		recall_attempt += 1.7 / 12 * float32(policy.password_length)
+		attempts += 1.6 / 12 * float32(policy.password_length)
 		if policy.password_length < 12 {
 			security += "larger than 40%"
 		} else if policy.password_length >= 12 && policy.password_length < 16 {
@@ -304,7 +317,7 @@ func CalShay(policy *passwordPolicy) *shay {
 			security += "range from 10% to 20%"
 		}
 	} else {
-		sec += 0.84 * float32(policy.password_length)
+		sec += 15.3 / 20 * float32(policy.password_length)
 		recall_attempt += 1.65 / 12 * float32(policy.password_length)
 		attempts += 1.7
 		if policy.password_length < 12 {
@@ -374,7 +387,7 @@ func Analyze(A *von, B *greene, C *WMelicher, D *shay, companyInfo *company, pol
 	MaxError, MinError := FindMinMax(errorlist)
 	Maxerror := strconv.FormatFloat(float64(MaxError), 'f', 1, 64)
 	Minerror := strconv.FormatFloat(float64(MinError), 'f', 1, 64)
-	//100 employee
+
 	MaxerrorsNum := math.Ceil(float64(MaxError*float64(attempt)/100)) * 100
 	MinerrorsNum := math.Ceil(float64(MinError*float64(attempt)/100)) * 100
 	AverageNum := math.Ceil(float64(averageError*float32(attempt)/100)) * 100
@@ -474,6 +487,7 @@ func Analyze_Compare(salary int, people int, policy *passwordPolicy, A *von, B *
 	//money : entry
 	moneycost := (totalEntry) * salary
 	newS.money = int64(moneycost)
+	newS.failedattempt = policy.failed_attempt
 
 	return newS
 }
@@ -735,8 +749,10 @@ func main() {
 			"SecurityLevel":  TransA.securityLevel,
 			"SecurityLevelB": TransB.securityLevel,
 
-			"WipeA": TransA.wipeNum,
-			"WipeB": TransB.wipeNum,
+			"FailedA": TransA.failedattempt,
+			"FailedB": TransB.failedattempt,
+			"WipeA":   TransA.wipeNum,
+			"WipeB":   TransB.wipeNum,
 		}
 		c.HTML(http.StatusOK, "compare.html", number)
 		// c.JSON(http.StatusOK, map_m)

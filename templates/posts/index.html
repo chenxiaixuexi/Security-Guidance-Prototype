@@ -47,7 +47,9 @@
         <form method="POST" action="/" enctype="multipart/form-data" onsubmit="return checkForm()">
       
       <p class="text">
-        Please choose the number of employees and the average salary
+        Please choose the number of employees and the average salary. When users choose a range, the system will estimate the mean value as the number of employees,
+        and select the maximum as the hourly wage.
+        The number of employees and hourly wage could help to calculate the money cost.
       </p>
       <div class="custom-survey add-top-margin add-bottom-margin">
         <span class="text">1. The size of company</span>
@@ -93,7 +95,7 @@
         <span class="text">5. Password policy</span>
         <input class="custom-textbox stretch-on-mobile" name="file" type="file" accept=".mobileconfig" id="fileupload">
       </div>
-      <input  type="submit" value="Upload" id = "submitbut"/>
+      <input  type="submit" value="Analyze Your Configurations" id = "submitbut"/>
     </form>
     <script>
       function checkForm(){

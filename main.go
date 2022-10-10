@@ -377,13 +377,20 @@ func Analyze(A *von, B *greene, C *WMelicher, D *shay, companyInfo *company, pol
 
 	//failed attempt
 	errorC := (C.attempts*10 - 10) / (C.attempts * 10)
+	if errorC < 0 {
+		errorC = 0
+	}
 	errorD := (D.entryAtt*10 - 10) / (D.entryAtt * 10)
+	if errorD < 0 {
+		errorD = 0
+	}
 	averageError := (A.errorrate + B.errorrate + errorC + errorD) / 4
 	attempt := 365 * 4
 	wipeTimes := math.Ceil(math.Pow(float64(averageError), float64(policy.failed_attempt)) * float64(attempt))
 	esitimateAverage := strconv.FormatFloat(float64(averageError), 'f', 1, 64)
 	var errorlist []float64
 	errorlist = append(errorlist, float64(A.errorrate), float64(B.errorrate), float64(errorC), float64(errorD))
+	fmt.Println("error", float64(A.errorrate), float64(B.errorrate), float64(errorC), float64(errorD))
 	MaxError, MinError := FindMinMax(errorlist)
 	Maxerror := strconv.FormatFloat(float64(MaxError), 'f', 1, 64)
 	Minerror := strconv.FormatFloat(float64(MinError), 'f', 1, 64)
